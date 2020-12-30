@@ -1,0 +1,3 @@
+/home/shinmen/Workspace/Snake/out/build/CMakeFiles/rebuild_cache.dir
+/home/shinmen/Workspace/Snake/out/build/CMakeFiles/edit_cache.dir
+/home/shinmen/Workspace/Snake/out/build/CMakeFiles/Snake.dir

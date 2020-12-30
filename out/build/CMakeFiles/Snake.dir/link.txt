@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/Snake.dir/main.cpp.o -o Snake 

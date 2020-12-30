@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/shinmen/Workspace/Snake/out/build",
+  "command": "/usr/bin/g++ -g -o CMakeFiles/Snake.dir/main.cpp.o -c /home/shinmen/Workspace/Snake/main.cpp",
+  "file": "/home/shinmen/Workspace/Snake/main.cpp"
+}
+]
