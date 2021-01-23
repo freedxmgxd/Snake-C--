@@ -51,6 +51,7 @@ class Snake{ // This class contain the map, snake and food attributes
     void snakeMove(char direction);
     void reset();
     void generateFood();
+    void cleanUp();
 
 };
 
@@ -110,7 +111,7 @@ void Snake::snakeMove(char direction){
             auxBody[i][0] = snakeBody[i][0];
             auxBody[i][1] = snakeBody[i][1];
         }
-        delete[] snakeBody;
+        delete snakeBody;
 
         snakeBodyLenght = snakeBodyLenght + 1;
 
@@ -124,7 +125,9 @@ void Snake::snakeMove(char direction){
             snakeBody[i] = new int[2];
             snakeBody[i][0] = auxBody[i - 1][0];
             snakeBody[i][1] = auxBody[i - 1][1];
+            delete auxBody[i - 1];
         }
+        delete auxBody;
         generateFood();
     }else {
         for(int i = snakeBodyLenght - 1; i > 0; i--){
@@ -181,6 +184,17 @@ void Snake::generateFood(){
         }
     }
 }
+void Snake::cleanUp(){
+    for (int i = 0; i < height; i++){
+        delete mapMatrix[i];
+    }
+    delete mapMatrix;
+
+    for (int i = 0; i < snakeBodyLenght; i++){
+        delete snakeBody[i];
+    }
+    delete snakeBody;
+}
 
 int main(){
 
@@ -194,4 +208,5 @@ int main(){
         teste.snakeMove(movemento);    
         teste.showMap();    
     }
+    teste.cleanUp();
 }
