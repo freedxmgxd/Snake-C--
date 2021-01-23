@@ -5,10 +5,12 @@
 class Snake{ // This class contain the map, snake and food attributes
     //Core attributes
     private:
-    int height, width;
+    int height;
+    int width;
+    int snakeBodyLenght;
     char** mapMatrix;
     int snakeHead[2];
-    int snakeBodyLenght;
+
     int** snakeBody;
     int food[2] = {0,0};
 
@@ -19,16 +21,17 @@ class Snake{ // This class contain the map, snake and food attributes
 
     public:
     //Constructor
-    Snake(int heightCr, int widthCr){
+    Snake(int heightCr, int widthCr) :
+        height(heightCr),  
+        width(widthCr),
+        snakeBodyLenght(1)
+        {
         int X = heightCr / 2;
         int Y = widthCr / 2;
 
-        height = heightCr;
-        width = widthCr;
         mapMatrix = createMap(height, width);
         snakeHead[0] = X;
         snakeHead[1] = Y;
-        snakeBodyLenght = 1;
 
         snakeBody = new int*[snakeBodyLenght];
         snakeBody[0] = new int[2];
@@ -157,6 +160,11 @@ void Snake::reset(){
     snakeBody[0] = new int[2];
     snakeBody[0][0] = X;
     snakeBody[0][1] = Y - 1;
+
+    mapMatrix[food[0]][food[1]] = mapChar;
+
+    food[0] = X;
+    food[1] = width - 2;
 }
 
 void Snake::generateFood(){
@@ -166,6 +174,12 @@ void Snake::generateFood(){
 
     food[0] = distributionH(generator);
     food[1] = distributionW(generator);
+
+    for(int i = snakeBodyLenght -1; i >= 0; i--){
+        if ((food[0] == snakeBody[i][0] and food[1] == snakeBody[i][1]) or (food[0] == snakeHead[0] and food[1] == snakeHead[1])){
+            generateFood();
+        }
+    }
 }
 
 int main(){
