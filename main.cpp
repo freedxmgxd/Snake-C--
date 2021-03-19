@@ -201,10 +201,11 @@ void Snake::generateFood(){
     food[0] = distributionH(generator);
     food[1] = distributionW(generator);
 
-    if (snakeBodyLenght > (height * width) - 1){
+    if (snakeBodyLenght > (height * width) - 2){
             std::cout << "You are free now!"<< std::endl;
             char hold;
             std::cin >> hold;
+            reset();
             return;
         }
 
