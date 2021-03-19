@@ -18,8 +18,8 @@
 			"isDirty" : false,
 			"major" : 3,
 			"minor" : 19,
-			"patch" : 3,
-			"string" : "3.19.3",
+			"patch" : 6,
+			"string" : "3.19.6",
 			"suffix" : ""
 		}
 	},
@@ -35,7 +35,7 @@
 			}
 		},
 		{
-			"jsonFile" : "cache-v2-4e55bf0c17ff17d9e82f.json",
+			"jsonFile" : "cache-v2-ae85324c8b98f45f5eb4.json",
 			"kind" : "cache",
 			"version" : 
 			{
@@ -64,7 +64,7 @@
 				"responses" : 
 				[
 					{
-						"jsonFile" : "cache-v2-4e55bf0c17ff17d9e82f.json",
+						"jsonFile" : "cache-v2-ae85324c8b98f45f5eb4.json",
 						"kind" : "cache",
 						"version" : 
 						{

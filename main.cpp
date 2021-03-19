@@ -2,25 +2,25 @@
 #include <iomanip>
 #include <random>
 
-class Snake{ // This class contain the map, snake and food attributes
-    //Core attributes
+class Snake{
+    
     private:
     int height;
     int width;
     int snakeBodyLenght;
     char** mapMatrix;
     int snakeHead[2];
+    char direction;
 
     int** snakeBody;
     int food[2] = {0,0};
 
     char mapChar = '0';
-    char headChar = 'C';
+    char headChar = 'H';
     char bodyChar = 'B';
     char foodChar = 'f';
 
     public:
-    //Constructor
     Snake(int heightCr, int widthCr) :
         height(heightCr),  
         width(widthCr),
@@ -32,6 +32,7 @@ class Snake{ // This class contain the map, snake and food attributes
         mapMatrix = createMap(height, width);
         snakeHead[0] = X;
         snakeHead[1] = Y;
+        direction = 'd';
 
         snakeBody = new int*[snakeBodyLenght];
         snakeBody[0] = new int[2];
@@ -42,9 +43,13 @@ class Snake{ // This class contain the map, snake and food attributes
         food[1] = width - 2;
     }
 
-    //Methods
+    ~Snake(){
+        std::cout << "Destroyed" << std::endl;
+        cleanUp();
+    }
+
     private:
-    char** createMap(int heightC, int widthC); //This method create the map matrix.
+    char** createMap(int heightC, int widthC);
     
     public:
     void showMap();
@@ -60,14 +65,13 @@ char** Snake::createMap(int heightC, int widthC){
     for (int i = 0; i < heightC; i++){
         map[i] = new char[widthC];
         for (int j = 0; j < widthC; j++){
-            map[i][j] = mapChar; // this will be what's printed in terminal.
+            map[i][j] = mapChar;
         }
     }
     return map;
 }
 
 void Snake::showMap(){
-    //this block show the snake in the map
     for (int i = 0; i < snakeBodyLenght; i++){
         mapMatrix[snakeBody[i][0]][snakeBody[i][1]] = bodyChar;
     }
@@ -81,24 +85,36 @@ void Snake::showMap(){
         std::cout << std::endl;
     }
 
-    //this block will clean the snake of the map
     for (int i = 0; i < snakeBodyLenght; i++){
         mapMatrix[snakeBody[i][0]][snakeBody[i][1]] = mapChar;
     }
     mapMatrix[snakeHead[0]][snakeHead[1]] = mapChar; 
 }
 
-void Snake::snakeMove(char direction){
+void Snake::snakeMove(char directionAux){
     int auxHead[2] = {snakeHead[0], snakeHead[1]}; 
-    
-    if (direction == 'd'){
-        auxHead[1]++; 
-    }else if (direction == 's'){
-        auxHead[0]++; 
-    }else if (direction == 'a'){
-        auxHead[1]--; 
-    }else if (direction == 'w'){
+
+    switch (directionAux)
+    {
+    case 'd':
+        auxHead[1]++;
+        direction = directionAux;
+        break;
+    case 's':
+        auxHead[0]++;
+        direction = directionAux; 
+        break;
+    case 'a':
+        auxHead[1]--;
+        direction = directionAux;
+        break; 
+    case 'w':
         auxHead[0]--; 
+        direction = directionAux;
+        break;
+    default:
+        snakeMove(direction);
+        return;
     }
 
     bool grow;
@@ -197,6 +213,10 @@ void Snake::cleanUp(){
 }
 
 int main(){
+
+     std::cout << sizeof(int) <<std::endl;
+
+    std::cout << sizeof(Snake) <<std::endl;
 
     char movemento;
     Snake teste(8, 9);
